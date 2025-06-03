@@ -18,13 +18,13 @@ jobs:
                 --project=${{ secrets.PROJECT_ID }} \
                 --format="value(status)")
                 if [ "$STATUS" = "TERMINATED" ]; then
-                    gcloud compute instances start "${{ secrets.VM_NAME }}" \
+                    gcloud compute instances start "${{ secrets.INSTANCE_NAME }}" \
                     --zone="${{ secrets.ZONE }}" \
-                    --project="${{ secrets.GCP_PROJECT_ID }}"
+                    --project="${{ secrets.PROJECT_ID }}"
                 elif [ "$STATUS" = "RUNNING" ]; then
-                    gcloud compute instances stop "${{ secrets.VM_NAME }}" \
+                    gcloud compute instances stop "${{ secrets.INSTANCE_NAME }}" \
                     --zone="${{ secrets.ZONE }}" \
-                    --project="${{ secrets.GCP_PROJECT_ID }}"
+                    --project="${{ secrets.PROJECT_ID }}"
                 else
                     echo "Status desconhecido: $STATUS"
                     exit 1
