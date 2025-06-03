@@ -6,7 +6,15 @@ jobs:
     up-vm-gcp:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v3
             - name: Login to GCP
               uses: google-github-actions/auth@v1
               with:
                   credentials_json: ${{ secrets.GCP_SA_KEY }}
+            - name: Status Verification
+              run: |
+               gcloud compute instances describe ${{ secrets.INSTANCE_NAME }} \
+                --zone=${{ secrets.ZONE }} \
+                --project=${{ secrets.PROJECT_ID }} \
+                --format="value(status)"
+
