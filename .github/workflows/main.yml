@@ -1,1 +1,12 @@
-
+name: Up vm GCP
+on:
+    repository_dispatch:
+        types: [up-vm-gcp]
+jobs:
+    up-vm-gcp:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Login to GCP
+              uses: google-github-actions/auth@v0
+              with:
+                  credentials_json: ${{ secrets.GCP_SA_KEY }}
